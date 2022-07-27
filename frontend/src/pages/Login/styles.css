@@ -1,0 +1,80 @@
+.my-container {
+    height: 100vh;
+}
+
+@media screen and (max-width: 800px) {
+    .my-container {
+        height: 200vh;
+    }
+}
+
+.my-img-container{
+    width: 60%;
+}
+
+.my-todo-img {
+    width: 100%;
+}
+
+.my-login-form-container {
+    height: 85%;
+    width: 80%;
+    border: 2px solid rgba(26, 59, 88, 0.24);
+    border-radius: 65px;
+}
+
+.my-login-form-container-content {
+    height: 85%;
+    width: 80%;
+}
+
+.my-login-form-header{
+    height: 4.2rem;
+    width: 100%;
+    border-bottom: 2px solid rgba(26, 59, 88, 0.24);
+}
+
+.my-login-form-header p{
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 1rem;
+    margin-right: 2rem;
+    display: inline-block;
+}
+
+.my-login-form-header .heading-active{
+    color: #1A3B58;
+}
+
+.my-login-form-header .heading-muted{
+    color: rgba(26, 59, 88, 0.33);
+}
+
+.my-login-form-header .heading-active:before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    width: 30%;
+    left: 3px;
+    border-top: 3px solid #1A3B58;
+    border-radius: 1.5px;
+}
+
+.my-login-form-content{
+    padding: 1rem 2rem;
+}
+
+.my-login-form-title-container{
+    padding-top: 2rem;
+}
+
+.my-login-form-title{
+
+}
+
+.my-login-form-subtitle{
+    color: #999999;
+}
+  
+ 

@@ -1,0 +1,19 @@
+.my-submit-button{
+    border-radius: 8px;
+    width: 100%;
+    padding: 6px;
+    color: white;
+    border: none;
+}
+
+.my-submit-button-active{
+    background-color: #329C89;
+}
+
+.my-submit-button-disabled{
+    background-color: #999999;
+}
+
+.my-error{
+    color: #F65B2A;
+}

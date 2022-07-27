@@ -15,8 +15,9 @@ table, caption, tbody, tfoot, thead, tr, th, td {
   font-weight: inherit;
   font-style: inherit;
   font-size: 100%;
-  font-family: inherit;
 }
+
+input, button, submit { border:none; } 
 
 em {
 	font-style: italic;
@@ -31,4 +32,14 @@ body {
 	margin:0;
 	padding:0;
 	height:100%;
+}
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.no-gutters > .col, .no-gutters > [class*="col-"] {
+    padding-right: 0;
+    padding-left: 0;
 }
