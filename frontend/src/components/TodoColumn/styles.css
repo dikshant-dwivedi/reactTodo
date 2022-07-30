@@ -1,0 +1,43 @@
+.my-todo-column-container{
+    height: 100%;
+    padding: 1rem;
+}
+
+.my-todo-column {
+    width: 100%;
+    height: 100%;
+    background-color:#F5F9F9;
+    border-radius: 15px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.my-todo-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.my-todo-heading{
+    font-weight: 500;
+}
+
+.my-todo-count{
+    background-color: #ECF3F3;
+    border-radius: 7px;
+    padding: 3px 12px;
+    color: #329C89;
+}
+
+.my-add-todo-btn {
+    background-color: #ECF3F3;
+    width: 100%;
+    margin: 1rem 0;
+    color: #329C89;
+    font-weight: 500;
+}
+
+.my-card-container {
+    overflow-y: scroll;
+    flex: 1;
+}

@@ -4,27 +4,51 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
+  updateProfile,
 } from "firebase/auth";
-import { collection, doc, addDoc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
+import { v4 as uuidv4 } from "uuid";
 
 const UserContext = createContext();
-const usersCollectionRef = collection(db, "users");
 
 export const UserContextProvider = ({ children }) => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
 
-  const createUserInDb = (name, email) => {
-    return addDoc(usersCollectionRef, { name, email });
+  const getUserFromDb = async (uid) => {
+    try {
+      const userDoc = doc(db, "users", uid);
+      const docSnap = await getDoc(userDoc);
+      if (docSnap.exists()) {
+        setUser({ ...docSnap.data(), uid });
+      } else {
+        setUser(null);
+      }
+    } catch (e) {
+      console.log(e);
+    }
   };
 
-  const getUserFromDb = (email) => {
-    const userDoc = doc(db, "users", email);
-    return getDoc(userDoc);
-  };
-
-  const createUser = (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
+  const createUser = async (name, email, password) => {
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(res.user.auth.currentUser, {
+        displayName: name,
+        photoURL: "assets/images/avatar.jpg",
+      });
+      return await setDoc(doc(db, "users", res.user.uid), {
+        name,
+        email,
+        photoURL: "assets/images/avatar.jpg",
+        tasks: {
+          todo: { id: "todo", title: "To do", tasks: [] },
+          inProgress: { id: "inProgress", title: "In progress", tasks: [] },
+          completed: { id: "completed", title: "Completed", tasks: [] },
+        },
+      });
+    } catch (e) {
+      throw e;
+    }
   };
 
   const signIn = (email, password) => {
@@ -37,7 +61,11 @@ export const UserContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser) {
+        getUserFromDb(currentUser.uid);
+      } else {
+        setUser(currentUser);
+      }
     });
     return () => {
       unsubscribe();
@@ -45,9 +73,7 @@ export const UserContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider
-      value={{ createUser, user, logout, signIn, createUserInDb }}
-    >
+    <UserContext.Provider value={{ createUser, user, logout, signIn }}>
       {children}
     </UserContext.Provider>
   );

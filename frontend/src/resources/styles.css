@@ -1,0 +1,13 @@
+.my-svg-icon {
+    fill: #9A9A9A;
+}
+
+.my-svg-icon-active {
+    fill: #212121;
+}
+
+.my-svg-icon:hover {
+    fill: #212121;
+}
+
+

@@ -13,6 +13,7 @@ import {
 } from "./pages";
 import { UserContextProvider } from "./context/UserContext";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { TodoContextProvider } from "./context/TodoContext";
 
 function App() {
   return (
@@ -26,7 +27,14 @@ function App() {
             />
             <Route path={ROUTES.OVERVIEW} element={<Overview />} />
             <Route path={ROUTES.STATS} element={<Stats />} />
-            <Route path={ROUTES.PROJECTS} element={<Projects />} />
+            <Route
+              path={ROUTES.PROJECTS}
+              element={
+                <TodoContextProvider>
+                  <Projects />
+                </TodoContextProvider>
+              }
+            />
             <Route path={ROUTES.CHAT} element={<Chat />} />
             <Route path={ROUTES.CALENDAR} element={<Calendar />} />
             <Route path={ROUTES.SETTING} element={<Settings />} />

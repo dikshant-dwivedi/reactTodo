@@ -14,15 +14,14 @@ export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
-  const { createUser, createUserInDb, signIn } = useFirebaseUser();
+  const { createUser, signIn } = useFirebaseUser();
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      await createUser(email, password);
-      await createUserInDb(fullName, email);
+      await createUser(fullName, email, password);
       navigate("/");
       setError("");
     } catch (e) {

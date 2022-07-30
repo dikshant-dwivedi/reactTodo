@@ -69,6 +69,7 @@ export const SideNavBar = () => {
               <div
                 className="my-link-container"
                 style={{ borderRight: isActive ? "4px solid #329C89" : "none" }}
+                kay="l.path"
               >
                 <NavLink
                   to={l.path}
