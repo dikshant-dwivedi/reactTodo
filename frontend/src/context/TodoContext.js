@@ -52,6 +52,7 @@ export const TodoContextProvider = ({ children }) => {
     return () => {
       unsubscribe();
     };
+    // eslint-disable-next-line
   }, []);
 
   return (
