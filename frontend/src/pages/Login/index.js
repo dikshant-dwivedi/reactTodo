@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { InputField } from "../../components";
 import "./styles.css";
 import { useFirebaseUser } from "../../context/UserContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 
 const validName = new RegExp("^[a-zA-Z]+ [a-zA-Z]+$");
 const validPassword = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$");
@@ -151,6 +151,7 @@ export const Login = () => {
           </div>
         </div>
       </div>
+      <Outlet />
     </div>
   );
 };

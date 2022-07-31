@@ -1,22 +1,11 @@
 import "./styles.css";
-import React from "react";
-import { useFirebaseUserTodo } from "../../context/TodoContext";
-import { useFirebaseUser } from "../../context/UserContext";
+import React, { useState } from "react";
 import { Droppable } from "react-beautiful-dnd";
-import { v4 as uuidv4 } from "uuid";
 import TaskCard from "../TaskCard";
+import TaskModal from "../TaskModal";
 
 const TodoColumn = ({ section }) => {
-  const { addNewTask } = useFirebaseUserTodo();
-  const { user } = useFirebaseUser();
-
-  const handleAddTodo = (e) => {
-    addNewTask(section.id, {
-      id: uuidv4(),
-      title: "sample task",
-      description: "sample description",
-    });
-  };
+  const [showAddTaskModal, setShowAddTaskModal] = useState(false);
 
   return (
     <Droppable key={section.id} droppableId={section.id}>
@@ -31,12 +20,21 @@ const TodoColumn = ({ section }) => {
               <span className="h5 my-todo-heading">{section.title}</span>
               <span className="my-todo-count">{section.tasks.length}</span>
             </div>
-            <div className="btn my-add-todo-btn" onClick={handleAddTodo}>
+            <div
+              className="btn my-add-todo-btn"
+              onClick={() => setShowAddTaskModal(true)}
+            >
               +
             </div>
+            <TaskModal
+              type="add"
+              sectionId={section.id}
+              show={showAddTaskModal}
+              handleClose={() => setShowAddTaskModal(false)}
+            />
             <div className="my-card-container">
               {section.tasks.map((task, index) => (
-                <TaskCard task={task} index={index} />
+                <TaskCard task={task} sectionId={section.id} index={index} />
               ))}
               {provided.placeholder}
             </div>

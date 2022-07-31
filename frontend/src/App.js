@@ -1,6 +1,6 @@
 import "./App.css";
 import * as ROUTES from "./constants/index";
-import { ProtectedRoutes } from "./components";
+import { ProtectedRoutes, PublicRoutes } from "./components";
 import {
   Home,
   Login,
@@ -40,7 +40,9 @@ function App() {
             <Route path={ROUTES.SETTING} element={<Settings />} />
           </Route>
         </Route>
-        <Route path={ROUTES.LOGIN} element={<Login />} />
+        <Route path="signin" element={<PublicRoutes />}>
+          <Route path="/signin" element={<Login />} />
+        </Route>
       </Routes>
     </UserContextProvider>
   );

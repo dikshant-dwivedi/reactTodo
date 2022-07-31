@@ -10,6 +10,27 @@ export const TodoContextProvider = ({ children }) => {
   const { user } = useFirebaseUser();
   const docRef = doc(db, "users", user.uid);
 
+  const editTask = async (sectionId, tasks) => {
+    try {
+      let updateParam = {};
+      updateParam[`tasks.${sectionId}.tasks`] = tasks;
+      await updateDoc(docRef, updateParam);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const moveTask = async (srcId, destId, srcTasks, destTasks) => {
+    try {
+      let updateParam = {};
+      updateParam[`tasks.${srcId}.tasks`] = srcTasks;
+      updateParam[`tasks.${destId}.tasks`] = destTasks;
+      await updateDoc(docRef, updateParam);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const addNewTask = async (sectionId, task) => {
     try {
       let updateParam = {};
@@ -23,7 +44,9 @@ export const TodoContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onSnapshot(doc(db, "users", user.uid), (doc) => {
-      setTasks(doc.data().tasks);
+      const tasks = Object.values(doc.data().tasks);
+      tasks.sort((a, b) => a.sortOrder - b.sortOrder);
+      setTasks(tasks);
     });
 
     return () => {
@@ -32,7 +55,9 @@ export const TodoContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <TodoContext.Provider value={{ addNewTask, tasks }}>
+    <TodoContext.Provider
+      value={{ addNewTask, moveTask, tasks, setTasks, editTask }}
+    >
       {children}
     </TodoContext.Provider>
   );

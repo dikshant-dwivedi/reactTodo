@@ -1,0 +1,10 @@
+.my-add-task-btn {
+    font-weight: 500;
+    background-color: #329C89;
+    color: #ECF3F3;
+    border-color: #65cdba;
+}
+
+.my-add-task-btn:hover {
+    color: #ECF3F3;
+}

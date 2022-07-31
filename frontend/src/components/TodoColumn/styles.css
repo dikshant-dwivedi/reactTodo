@@ -38,6 +38,6 @@
 }
 
 .my-card-container {
-    overflow-y: scroll;
-    flex: 1;
+    flex: 1 1;
+    overflow: auto;
 }

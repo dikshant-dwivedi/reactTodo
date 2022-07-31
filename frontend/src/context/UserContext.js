@@ -36,14 +36,66 @@ export const UserContextProvider = ({ children }) => {
         displayName: name,
         photoURL: "assets/images/avatar.jpg",
       });
-      return await setDoc(doc(db, "users", res.user.uid), {
+      await setDoc(doc(db, "users", res.user.uid), {
         name,
         email,
         photoURL: "assets/images/avatar.jpg",
         tasks: {
-          todo: { id: "todo", title: "To do", tasks: [] },
-          inProgress: { id: "inProgress", title: "In progress", tasks: [] },
-          completed: { id: "completed", title: "Completed", tasks: [] },
+          todo: {
+            id: "todo",
+            sortOrder: 1,
+            title: "To do",
+            tasks: [
+              {
+                id: uuidv4(),
+                title: "Design- App",
+                description:
+                  "Modifying Career, Scholarship and Entrance exam screen Acc to new design pattern ",
+              },
+              {
+                id: uuidv4(),
+                title: "Prototyping",
+                description: "Account -> Profile Section",
+              },
+            ],
+          },
+          inProgress: {
+            id: "inProgress",
+            sortOrder: 2,
+            title: "In progress",
+            tasks: [
+              {
+                id: uuidv4(),
+                title: "Frontend",
+                description:
+                  "As a Content Annotator, I should be able add tags in colleges, So that colleges can improve",
+              },
+            ],
+          },
+          completed: {
+            id: "completed",
+            sortOrder: 3,
+            title: "Completed",
+            tasks: [
+              {
+                id: uuidv4(),
+                title: "Backend",
+                description:
+                  "Create API for search colleges ,exams, scholarships, career_pathways",
+              },
+              {
+                id: uuidv4(),
+                title: "Cohorts and arms",
+                description: "Move feature from admin and vendor to freyja",
+              },
+              {
+                id: uuidv4(),
+                title: "Compliance automation",
+                description:
+                  "Design feature for automating standard operating procedures and auditing",
+              },
+            ],
+          },
         },
       });
     } catch (e) {

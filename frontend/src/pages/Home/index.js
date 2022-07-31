@@ -5,8 +5,8 @@ import "./styles.css";
 
 export const Home = () => {
   return (
-    <div className="no-gutters my-container">
-      <div className="row h-100 no-gutters">
+    <div className="no-gutters my-home-container">
+      <div className="row no-gutters h-100">
         <div className="col-sm col-md-2">
           <SideNavBar />
         </div>
